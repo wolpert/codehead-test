@@ -1,0 +1,150 @@
+/*
+ * Copyright (c) 2022 CodeHead Systems. All rights reserved
+ */
+
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+        maven { url "https://plugins.gradle.org/m2/" }
+        maven { url "https://maven.google.com" } // Google's Maven repository
+        gradlePluginPortal() // was jcenter() which is dying
+        google()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:4.0.1'
+        classpath 'org.gretty:gretty:3.0.2'
+    }
+}
+group 'com.codeheadsystems'
+version '1.0-SNAPSHOT'
+
+apply plugin: "java-library"
+apply plugin: "eclipse"
+apply plugin: 'jacoco'
+apply plugin: 'idea'
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+repositories {
+    mavenLocal()
+    mavenCentral()
+    gradlePluginPortal()  // was jcenter() which is dying
+    google()
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+    maven { url "https://oss.sonatype.org/content/repositories/releases/" }
+    maven { url "https://s3-us-west-2.amazonaws.com/dynamodb-local/release/" }
+}
+
+ext {
+    appName = "codehead-test"
+    version = "1.0"
+}
+
+configurations {
+    project.archivesBaseName = "${appName}"
+    jar.baseName = "${appName}"
+}
+test {
+    useJUnitPlatform() // needed for junit5
+    finalizedBy jacocoTestReport
+}
+jacocoTestReport {
+    dependsOn test
+    reports {
+        xml.enabled true
+        csv.enabled true
+    }
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: [
+                    '**/dagger/**.class',
+                    '**/Dagger*Builder.class',
+                    '**/*Exception.class',
+                    '**/*Module.class',
+                    '**/*_Factory.class',
+                    '**/*_Factory.*class',
+                    '**/*InstanceHolder.class',
+                    '**/*_Factory$InstanceHolder.class'
+            ])
+        }))
+    }
+}
+def excludeFiles = [
+        '**.dagger.**',
+        '**.Dagger*Builder',
+        '**.*Exception',
+        '**.*Module',
+        '**.*_Factory',
+        '**.*_Factory*',
+        '**.InstanceHolder',
+        '**.*_Factory$InstanceHolder'
+]
+
+// If you want to override, use this in your package and set. This is the low bar.
+jacocoTestCoverageVerification {
+    dependsOn jacocoTestReport
+    violationRules {
+        rule {
+            excludes = excludeFiles
+            element = 'CLASS'
+            limit {
+                counter = 'LINE'
+                value = 'COVEREDRATIO'
+                minimum = 0.8
+            }
+        }
+        rule {
+            excludes = excludeFiles
+            element = 'CLASS'
+            limit {
+                counter = 'BRANCH'
+                value = 'COVEREDRATIO'
+                minimum = 0.7
+            }
+        }
+    }
+}
+
+jacocoTestReport.finalizedBy jacocoTestCoverageVerification
+
+// Create the pom configuration:
+def pomConfig = {
+    licenses {
+        license {
+            name "The Apache Software License, Version 2.0"
+            url "http://www.apache.org/licenses/LICENSE-2.0.txt"
+            distribution "repo"
+        }
+    }
+    developers {
+        developer {
+            id "wolpert"
+            name "Ned Wolpert"
+            email "ned.wolpert@codeheadsystems.com"
+        }
+    }
+
+    scm {
+        url "https://github.com/wolpert/terrapin"
+    }
+}
+
+dependencies {
+    implementation("com.google.guava:guava:31.1-jre")
+    implementation("com.fasterxml.jackson.core:jackson-core:2.13.4")
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.13.4")
+    implementation("org.junit.jupiter:junit-jupiter-api:5.9.0")
+    implementation("org.assertj:assertj-core:3.23.1")
+    implementation("org.mockito:mockito-junit-jupiter:4.8.0")
+    implementation("org.mockito:mockito-core:4.8.0")
+
+    // Use JUnit Jupiter Engine for testing.
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.0")
+    testImplementation("org.immutables:value-annotations:2.9.2")
+    testImplementation("com.fasterxml.jackson.core:jackson-annotations:2.13.4")
+    testImplementation("com.fasterxml.jackson.core:jackson-databind:2.13.4")
+    testAnnotationProcessor("org.immutables:value:2.9.2")
+}
