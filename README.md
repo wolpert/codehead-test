@@ -53,3 +53,5 @@ public class StandardImmutableModelTest extends BaseJacksonTest<StandardImmutabl
 * Compatible with @JsonIgnore.
 * Handles maps/lists/sets as well.
 * Jupiter and AssertJ focused.
+* Polymorphic testing. Ensure your base class can marshal to your implementing one
+via implementing  `getPolymorphicBaseClass()`
