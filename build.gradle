@@ -17,16 +17,16 @@ buildscript {
         classpath 'org.gretty:gretty:3.0.2'
     }
 }
-group 'com.codeheadsystems'
-version '1.0-SNAPSHOT'
 
-apply plugin: "java-library"
-apply plugin: "eclipse"
-apply plugin: 'jacoco'
-apply plugin: 'idea'
+plugins {
+    id 'java-library'
+    id 'jacoco'
+    id 'idea'
+    id 'signing'
+}
 java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
 }
 repositories {
     mavenLocal()
@@ -38,9 +38,12 @@ repositories {
     maven { url "https://s3-us-west-2.amazonaws.com/dynamodb-local/release/" }
 }
 
+group 'com.codeheadsystems'
+version '1.0.0-SNAPSHOT'
+// publish and signing
+
 ext {
-    appName = "codehead-test"
-    version = "1.0"
+    appName = 'codehead-test'
 }
 
 configurations {
@@ -110,26 +113,18 @@ jacocoTestCoverageVerification {
 
 jacocoTestReport.finalizedBy jacocoTestCoverageVerification
 
-// Create the pom configuration:
-def pomConfig = {
-    licenses {
-        license {
-            name "The Apache Software License, Version 2.0"
-            url "http://www.apache.org/licenses/LICENSE-2.0.txt"
-            distribution "repo"
-        }
-    }
-    developers {
-        developer {
-            id "wolpert"
-            name "Ned Wolpert"
-            email "ned.wolpert@codeheadsystems.com"
-        }
-    }
-
-    scm {
-        url "https://github.com/wolpert/terrapin"
-    }
+apply plugin: 'maven-publish' // publish
+// tasks needed to publish
+task javadocJar(type: Jar) {
+    classifier = 'javadoc'
+    from javadoc
+}
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+artifacts {
+    archives javadocJar, sourcesJar
 }
 
 dependencies {
@@ -147,4 +142,39 @@ dependencies {
     testImplementation("com.fasterxml.jackson.core:jackson-annotations:2.13.4")
     testImplementation("com.fasterxml.jackson.core:jackson-databind:2.13.4")
     testAnnotationProcessor("org.immutables:value:2.9.2")
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            pom {
+                name = 'codehead-test'
+                description = 'Set of utilities to help test Immutables/Jackson.'
+                url = 'http://github.com/wolpert/codehead-test/tree/master'
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'wolpert'
+                        name = 'Ned Wolpert'
+                        email = 'ned.wolpert@gmail.com'
+                    }
+                }
+                scm {
+                    connection = 'scm:git:git://github.com/wolpert/codehead-test.git'
+                    developerConnection = 'scm:git:ssh://github.com/wolpert/codehead-test.git'
+                    url = 'https://github.com/wolpert/codehead-test/'
+                }
+            }
+        }
+    }
+}
+
+
+signing {
+    sign publishing.publications.mavenJava
 }
