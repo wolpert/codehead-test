@@ -13,10 +13,10 @@ I've seen variations of this from different places and made my own version that 
 gradle
 ```groovy
 repositories {
-    jcenter()
+    central()
 }
 dependencies {
-    implementation 'com.codeheadsystems:codehead-test:1.0'
+    implementation 'com.codeheadsystems:codehead-test:1.0.0'
 }
 ```
 

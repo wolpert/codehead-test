@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2022 CodeHead Systems. All rights reserved
  */
-
+// publishing : https://stackoverflow.com/questions/71181790/how-do-you-publish-a-kotlin-artifact-to-maven-central
 buildscript {
     repositories {
         mavenLocal()
@@ -174,10 +174,11 @@ publishing {
     }
     repositories {
         maven {
-            // change URLs to point to your repos, e.g. https://my.org/repo
-            def releasesRepoUrl = layout.buildDirectory.dir('repos/releases')
-            def snapshotsRepoUrl = layout.buildDirectory.dir('repos/snapshots')
+            def releasesRepoUrl = "https://oss.sonatype.org/service/local/staging/deploy/maven2"
+            def snapshotsRepoUrl = "https://oss.sonatype.org/content/repositories/snapshots"
             url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+            name = "ossrh"
+            credentials(PasswordCredentials)
         }
     }
 }
