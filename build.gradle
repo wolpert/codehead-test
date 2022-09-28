@@ -23,10 +23,13 @@ plugins {
     id 'jacoco'
     id 'idea'
     id 'signing'
+    id 'maven-publish'
 }
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8
+    withJavadocJar()
+    withSourcesJar()
 }
 repositories {
     mavenLocal()
@@ -113,19 +116,6 @@ jacocoTestCoverageVerification {
 
 jacocoTestReport.finalizedBy jacocoTestCoverageVerification
 
-apply plugin: 'maven-publish' // publish
-// tasks needed to publish
-task javadocJar(type: Jar) {
-    classifier = 'javadoc'
-    from javadoc
-}
-task sourcesJar(type: Jar) {
-    classifier = 'sources'
-    from sourceSets.main.allSource
-}
-artifacts {
-    archives javadocJar, sourcesJar
-}
 
 dependencies {
     implementation("com.google.guava:guava:31.1-jre")
@@ -147,14 +137,24 @@ dependencies {
 publishing {
     publications {
         mavenJava(MavenPublication) {
+            artifactId = appName
+            from components.java
+            versionMapping {
+                usage('java-api') {
+                    fromResolutionOf('runtimeClasspath')
+                }
+                usage('java-runtime') {
+                    fromResolutionResult()
+                }
+            }
             pom {
-                name = 'codehead-test'
-                description = 'Set of utilities to help test Immutables/Jackson.'
-                url = 'http://github.com/wolpert/codehead-test/tree/master'
+                name = 'CodeHead-Test'
+                description = 'Testing utilities'
+                url = 'https://github.com/wolpert/codehead-test'
                 licenses {
                     license {
                         name = 'The Apache License, Version 2.0'
-                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                        url = 'https://www.apache.org/licenses/LICENSE-2.0.txt'
                     }
                 }
                 developers {
@@ -172,9 +172,23 @@ publishing {
             }
         }
     }
+    repositories {
+        maven {
+            // change URLs to point to your repos, e.g. https://my.org/repo
+            def releasesRepoUrl = layout.buildDirectory.dir('repos/releases')
+            def snapshotsRepoUrl = layout.buildDirectory.dir('repos/snapshots')
+            url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+        }
+    }
 }
 
-
 signing {
+    useGpgCmd()
     sign publishing.publications.mavenJava
+}
+
+javadoc {
+    if(JavaVersion.current().isJava9Compatible()) {
+        options.addBooleanOption('html5', true)
+    }
 }
