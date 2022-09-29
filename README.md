@@ -16,7 +16,7 @@ repositories {
     central()
 }
 dependencies {
-    implementation 'com.codeheadsystems:codehead-test:1.0.0'
+    implementation 'com.codeheadsystems:codehead-test:1.0.1'
 }
 ```
 
