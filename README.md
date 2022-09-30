@@ -8,13 +8,12 @@ ObjectMapper to be used for the tests as well. See the state machine project for
 
 I've seen variations of this from different places and made my own version that uses junit5 and assertJ.
 
+Java8 Compatible.
+
 ## Release
 
 gradle
 ```groovy
-repositories {
-    central()
-}
 dependencies {
     implementation 'com.codeheadsystems:codehead-test:1.0.1'
 }
