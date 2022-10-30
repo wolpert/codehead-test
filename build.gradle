@@ -131,7 +131,7 @@ dependencies {
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.0")
     testImplementation("org.immutables:value-annotations:2.9.2")
     testImplementation("com.fasterxml.jackson.core:jackson-annotations:2.13.4")
-    testImplementation("com.fasterxml.jackson.core:jackson-databind:2.13.4")
+    testImplementation('com.fasterxml.jackson.core:jackson-databind:2.13.4.2')
     testAnnotationProcessor("org.immutables:value:2.9.2")
 }
 
