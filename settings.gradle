@@ -1,0 +1,13 @@
+
+dependencyResolutionManagement {
+    versionCatalogs {
+        repositories {
+            mavenLocal()
+            mavenCentral()
+        }
+        libs {
+            from("com.codeheadsystems:dependencies:1.0.0")
+        }
+    }
+}
+
