@@ -52,7 +52,7 @@ ext {
 
 configurations {
     project.archivesBaseName = "${appName}"
-    jar.baseName = "${appName}"
+    jar.archiveBaseName = "${appName}"
 }
 test {
     useJUnitPlatform() // needed for junit5
@@ -60,10 +60,6 @@ test {
 }
 jacocoTestReport {
     dependsOn test
-    reports {
-        xml.enabled true
-        csv.enabled true
-    }
     afterEvaluate {
         classDirectories.setFrom(files(classDirectories.files.collect {
             fileTree(dir: it, exclude: [
