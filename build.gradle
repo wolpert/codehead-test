@@ -19,11 +19,13 @@ buildscript {
 }
 
 plugins {
+    id 'base'
     id 'java-library'
     id 'jacoco'
     id 'idea'
     id 'signing'
     id 'maven-publish'
+    id 'jvm-test-suite'
 }
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8
@@ -49,15 +51,25 @@ version '1.0.6-SNAPSHOT'
 ext {
     appName = 'codehead-test'
 }
+base {
+    archivesName = "${appName}"
+    version = "${version}"
+}
 
-configurations {
-    project.archivesBaseName = "${appName}"
-    jar.archiveBaseName = "${appName}"
+testing {
+    suites {
+        test {
+            useJUnitJupiter()
+            dependencies {
+                runtimeOnly(libs.junit.jupiter.engine)
+                implementation(libs.immutables.value.annotations)
+                implementation(libs.jackson.annotations)
+                annotationProcessor(libs.immutables.value)
+            }
+        }
+    }
 }
-test {
-    useJUnitPlatform() // needed for junit5
-    finalizedBy jacocoTestReport
-}
+
 jacocoTestReport {
     dependsOn test
     afterEvaluate {
@@ -123,12 +135,6 @@ dependencies {
     implementation(libs.assertj.core)
     implementation(libs.mockito.junit.jupiter)
     implementation(libs.mockito.core)
-
-    // Use JUnit Jupiter Engine for testing.
-    testRuntimeOnly(libs.junit.jupiter.engine)
-    testImplementation(libs.immutables.value.annotations)
-    testImplementation(libs.jackson.annotations)
-    testAnnotationProcessor(libs.immutables.value)
 }
 
 publishing {
