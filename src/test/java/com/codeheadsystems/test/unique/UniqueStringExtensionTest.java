@@ -21,11 +21,23 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+/**
+ * The type Unique string extension test.
+ */
 @ExtendWith(UniqueStringExtension.class)
 public class UniqueStringExtensionTest {
 
+  /**
+   * The constant FAIL.
+   */
   public static final String FAIL = "fail";
+  /**
+   * The constant PREFIX.
+   */
   public static final String PREFIX = "PREFIX";
+  /**
+   * The constant SEPARATOR.
+   */
   public static final String SEPARATOR = ":";
   @UniqueString
   private String defaultString = FAIL;
@@ -39,6 +51,9 @@ public class UniqueStringExtensionTest {
   @UniqueString(prefix = PREFIX, separator = SEPARATOR)
   private String bothSet = FAIL;
 
+  /**
+   * Test default.
+   */
   @Test
   public void testDefault() {
     assertThat(defaultString)
@@ -48,6 +63,9 @@ public class UniqueStringExtensionTest {
         .contains("_");
   }
 
+  /**
+   * Test prefix.
+   */
   @Test
   public void testPrefix() {
     assertThat(prefixSet)
@@ -58,6 +76,9 @@ public class UniqueStringExtensionTest {
 
   }
 
+  /**
+   * Test separator.
+   */
   @Test
   public void testSeparator() {
     assertThat(separatorSet)
@@ -68,6 +89,9 @@ public class UniqueStringExtensionTest {
 
   }
 
+  /**
+   * Test both.
+   */
   @Test
   public void testBoth() {
     assertThat(bothSet)

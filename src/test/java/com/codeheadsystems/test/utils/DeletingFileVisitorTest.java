@@ -10,6 +10,9 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+/**
+ * The type Deleting file visitor test.
+ */
 class DeletingFileVisitorTest {
 
   private Path tempFile;
@@ -17,6 +20,11 @@ class DeletingFileVisitorTest {
 
   private DeletingFileVisitor visitor;
 
+  /**
+   * Sets .
+   *
+   * @throws IOException the io exception
+   */
   @BeforeEach
   void setup() throws IOException {
     tempFile = Files.createTempFile("DeletingFileVisitorTest-", "txt");
@@ -24,6 +32,11 @@ class DeletingFileVisitorTest {
     visitor = new DeletingFileVisitor();
   }
 
+  /**
+   * Tear down.
+   *
+   * @throws IOException the io exception
+   */
   @AfterEach
   void tearDown() throws IOException {
     if (Files.exists(tempFile)) {
@@ -34,12 +47,22 @@ class DeletingFileVisitorTest {
     }
   }
 
+  /**
+   * Pre visit directory.
+   *
+   * @throws IOException the io exception
+   */
   @Test
   void preVisitDirectory() throws IOException {
     assertThat(visitor.preVisitDirectory(tempDir, null))
         .isEqualTo(FileVisitResult.CONTINUE);
   }
 
+  /**
+   * Visit file.
+   *
+   * @throws IOException the io exception
+   */
   @Test
   void visitFile() throws IOException {
     assertThat(Files.exists(tempFile)).isTrue();
@@ -48,12 +71,22 @@ class DeletingFileVisitorTest {
     assertThat(Files.exists(tempFile)).isFalse();
   }
 
+  /**
+   * Visit file failed.
+   *
+   * @throws IOException the io exception
+   */
   @Test
   void visitFileFailed() throws IOException {
     assertThat(visitor.visitFileFailed(tempDir, null))
         .isEqualTo(FileVisitResult.TERMINATE);
   }
 
+  /**
+   * Post visit directory.
+   *
+   * @throws IOException the io exception
+   */
   @Test
   void postVisitDirectory() throws IOException {
     assertThat(Files.exists(tempDir)).isTrue();

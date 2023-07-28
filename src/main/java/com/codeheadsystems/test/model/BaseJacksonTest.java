@@ -49,16 +49,28 @@ import org.mockito.junit.jupiter.MockitoExtension;
 /**
  * Extend your test with this class and provide the immutable class as a type.
  *
- * @param <T>
+ * @param <T> the type parameter
  */
 @ExtendWith(MockitoExtension.class)
 public abstract class BaseJacksonTest<T> {
 
   private static final Condition<Optional<?>> PRESENT = new Condition<>(Optional::isPresent, "isPresent");
+  /**
+   * The Methods to ignore.
+   */
   protected static Set<String> methodsToIgnore;
+  /**
+   * The Object mapper.
+   */
   protected ObjectMapper objectMapper;
+  /**
+   * The Simple name.
+   */
   protected String simpleName;
 
+  /**
+   * Find object methods.
+   */
   @BeforeAll
   public static void findObjectMethods() {
     methodsToIgnore = Arrays.stream(Object.class.getDeclaredMethods()).map(Method::getName).collect(Collectors.toSet());
@@ -98,6 +110,9 @@ public abstract class BaseJacksonTest<T> {
     return new ObjectMapper().registerModule(new Jdk8Module());
   }
 
+  /**
+   * Base jackson test setup.
+   */
   @BeforeEach
   public void baseJacksonTestSetup() {
     objectMapper = objectMapper();
@@ -191,7 +206,9 @@ public abstract class BaseJacksonTest<T> {
   /**
    * Test verifies expected methods that are not required by the model will not fail the JSON conversion if they are missing.
    *
-   * @throws JsonProcessingException if object mapper fails.
+   * @throws JsonProcessingException   if object mapper fails.
+   * @throws InvocationTargetException the invocation target exception
+   * @throws IllegalAccessException    the illegal access exception
    */
   @Test
   public void testNullableMethods() throws JsonProcessingException, InvocationTargetException, IllegalAccessException {
@@ -222,7 +239,9 @@ public abstract class BaseJacksonTest<T> {
    * Test verifies expected methods that are lists,sets,etc will not fail the JSON conversion if they are missing.
    * Note, this does not handle min quantites.
    *
-   * @throws JsonProcessingException if object mapper fails.
+   * @throws JsonProcessingException   if object mapper fails.
+   * @throws InvocationTargetException the invocation target exception
+   * @throws IllegalAccessException    the illegal access exception
    */
   @Test
   public void testCollectionMethods() throws JsonProcessingException, InvocationTargetException, IllegalAccessException {
@@ -254,7 +273,9 @@ public abstract class BaseJacksonTest<T> {
   /**
    * Test verifies expected methods that are maps will not fail the JSON conversion if they are missing.
    *
-   * @throws JsonProcessingException if object mapper fails.
+   * @throws JsonProcessingException   if object mapper fails.
+   * @throws InvocationTargetException the invocation target exception
+   * @throws IllegalAccessException    the illegal access exception
    */
   @Test
   public void testMapMethods() throws JsonProcessingException, InvocationTargetException, IllegalAccessException {
@@ -287,7 +308,9 @@ public abstract class BaseJacksonTest<T> {
   /**
    * Test verifies expected methods that are optional by the model will not fail the JSON conversion if they are missing.
    *
-   * @throws JsonProcessingException if object mapper fails.
+   * @throws JsonProcessingException   if object mapper fails.
+   * @throws InvocationTargetException the invocation target exception
+   * @throws IllegalAccessException    the illegal access exception
    */
   @Test
   public void testOptionalMethods() throws JsonProcessingException, InvocationTargetException, IllegalAccessException {
@@ -320,6 +343,11 @@ public abstract class BaseJacksonTest<T> {
     }
   }
 
+  /**
+   * Test polymorphic base class.
+   *
+   * @throws JsonProcessingException the json processing exception
+   */
   @Test
   public void testPolymorphicBaseClass() throws JsonProcessingException {
     final Optional<Class<?>> polymorphicBaseClass = getPolymorphicBaseClass();
@@ -333,6 +361,11 @@ public abstract class BaseJacksonTest<T> {
         .isInstanceOf(getBaseClass());
   }
 
+  /**
+   * Gets class methods.
+   *
+   * @return the class methods
+   */
   List<Method> getClassMethods() {
     final Class<T> clazz = getBaseClass();
     return Arrays.stream(clazz.getMethods())
@@ -343,6 +376,11 @@ public abstract class BaseJacksonTest<T> {
         .collect(Collectors.toList());
   }
 
+  /**
+   * Gets default methods.
+   *
+   * @return the default methods
+   */
   List<Method> getDefaultMethods() {
     return getClassMethods().stream()
         .filter(m -> m.getDeclaredAnnotation(JsonIgnore.class) == null)
@@ -350,6 +388,11 @@ public abstract class BaseJacksonTest<T> {
         .collect(Collectors.toList());
   }
 
+  /**
+   * Gets required methods.
+   *
+   * @return the required methods
+   */
   List<Method> getRequiredMethods() {
     return getClassMethods().stream()
         .filter(m -> m.getDeclaredAnnotation(JsonIgnore.class) == null)

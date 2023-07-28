@@ -125,7 +125,6 @@ jacocoTestCoverageVerification {
 
 jacocoTestReport.finalizedBy jacocoTestCoverageVerification
 
-
 dependencies {
     implementation(libs.guava)
     implementation(libs.jackson.core)

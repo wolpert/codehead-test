@@ -29,7 +29,13 @@ import org.junit.jupiter.api.extension.ExtensionContext;
  * Provides for a unique string that is valid for the tests.
  */
 public class UniqueStringExtension implements BeforeEachCallback, BeforeAllCallback {
+  /**
+   * The constant ATOMIC.
+   */
   public static final String ATOMIC = "atomic";
+  /**
+   * The Namespace.
+   */
   protected final ExtensionContext.Namespace namespace;
 
   /**

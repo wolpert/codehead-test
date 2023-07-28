@@ -26,6 +26,9 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
+/**
+ * The type Standard immutable model test.
+ */
 public class StandardImmutableModelTest extends BaseJacksonTest<StandardImmutableModel> {
 
     @Override
@@ -48,11 +51,11 @@ public class StandardImmutableModelTest extends BaseJacksonTest<StandardImmutabl
                 .build();
     }
 
-    /**
-     * This test verifies the core BaseJacksonTest finds not null methods correctly.
-     * Users of BaseJacksonTest do not need to implement this.
-     */
-    @Test
+  /**
+   * This test verifies the core BaseJacksonTest finds not null methods correctly.
+   * Users of BaseJacksonTest do not need to implement this.
+   */
+  @Test
     public void testNotNullMethodNamess() {
         // Arrange
         final List<String> names = getRequiredMethods()
@@ -65,11 +68,11 @@ public class StandardImmutableModelTest extends BaseJacksonTest<StandardImmutabl
                 .containsExactlyInAnyOrderElementsOf(ImmutableList.of("someInt", "someString", "someWeirdString"));
     }
 
-    /**
-     * This test verifies the core BaseJacksonTest finds collection methods correctly.
-     * Users of BaseJacksonTest do not need to implement this.
-     */
-    @Test
+  /**
+   * This test verifies the core BaseJacksonTest finds collection methods correctly.
+   * Users of BaseJacksonTest do not need to implement this.
+   */
+  @Test
     public void testCollectionMethodNamess() {
         // Arrange
         final List<String> names = getCollectionMethods()
@@ -82,11 +85,11 @@ public class StandardImmutableModelTest extends BaseJacksonTest<StandardImmutabl
                 .containsExactlyInAnyOrderElementsOf(ImmutableList.of("bunchOfString","bunchOfOtherString"));
     }
 
-    /**
-     * This test verifies the core BaseJacksonTest finds collection methods correctly.
-     * Users of BaseJacksonTest do not need to implement this.
-     */
-    @Test
+  /**
+   * This test verifies the core BaseJacksonTest finds collection methods correctly.
+   * Users of BaseJacksonTest do not need to implement this.
+   */
+  @Test
     public void testMapMethodNamess() {
         // Arrange
         final List<String> names = getMapMethods()
@@ -99,11 +102,11 @@ public class StandardImmutableModelTest extends BaseJacksonTest<StandardImmutabl
                 .containsExactly("aMap");
     }
 
-    /**
-     * This test verifies the core BaseJacksonTest finds nullable methods correctly.
-     * Users of BaseJacksonTest do not need to implement this.
-     */
-    @Test
+  /**
+   * This test verifies the core BaseJacksonTest finds nullable methods correctly.
+   * Users of BaseJacksonTest do not need to implement this.
+   */
+  @Test
     public void testNullableMethodNames() {
         // Arrange
         final List<String> names = getNullableMethods()
@@ -116,7 +119,10 @@ public class StandardImmutableModelTest extends BaseJacksonTest<StandardImmutabl
                 .containsExactly("nullableString");
     }
 
-    @Test
+  /**
+   * Test default method names.
+   */
+  @Test
     public void testDefaultMethodNames() {
         final List<String> names = getDefaultMethods()
                 .stream()
@@ -127,11 +133,11 @@ public class StandardImmutableModelTest extends BaseJacksonTest<StandardImmutabl
                 .containsExactly("defaultString");
     }
 
-    /**
-     * This test verifies the core BaseJacksonTest finds optional methods correctly.
-     * Users of BaseJacksonTest do not need to implement this.
-     */
-    @Test
+  /**
+   * This test verifies the core BaseJacksonTest finds optional methods correctly.
+   * Users of BaseJacksonTest do not need to implement this.
+   */
+  @Test
     public void testOptionalMethodNames() {
         // Arrange
         final List<String> names = getOptionalMethods()
