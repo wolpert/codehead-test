@@ -10,6 +10,9 @@ I've seen variations of this from different places and made my own version that 
 
 Java8 Compatible.
 
+## Status
+![CodeHead-Test Build](https://github.com/wolpert/codehead-test/actions/workflows/gradle.yml/badge.svg)
+
 ## Release
 
 gradle
