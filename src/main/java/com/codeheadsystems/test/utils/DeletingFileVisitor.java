@@ -27,6 +27,13 @@ import java.nio.file.attribute.BasicFileAttributes;
  * The type Deleting file visitor.
  */
 public class DeletingFileVisitor implements FileVisitor<Path> {
+
+  /**
+   * Instantiates a new Deleting file visitor.
+   */
+  public DeletingFileVisitor() {
+  }
+
   @Override
   public FileVisitResult preVisitDirectory(final Path path,
                                            final BasicFileAttributes basicFileAttributes) throws IOException {

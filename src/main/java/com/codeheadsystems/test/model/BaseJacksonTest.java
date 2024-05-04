@@ -69,6 +69,12 @@ public abstract class BaseJacksonTest<T> {
   protected String simpleName;
 
   /**
+   * Base constructor.
+   */
+  public BaseJacksonTest() {
+  }
+
+  /**
    * Find object methods.
    */
   @BeforeAll
