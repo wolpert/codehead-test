@@ -48,7 +48,6 @@ public class StandardImmutableModelTest extends BaseJacksonTest<StandardImmutabl
 }
 ```
 
-
 ## Features
 
 * Works with optional, @nullable fields.
