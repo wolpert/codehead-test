@@ -61,10 +61,6 @@ publishing {
                 name = "Codehead-Test"
                 description = "Testing utilities"
                 url = "https://github.com/wolpert/codehead-test"
-                properties = mapOf(
-                    "myProp" to "value",
-                    "prop.with.dots" to "anotherValue"
-                )
                 licenses {
                     license {
                         name = "The Apache License, Version 2.0"
