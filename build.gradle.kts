@@ -57,14 +57,6 @@ publishing {
         create<MavenPublication>("mavenJava") {
             artifactId = "codehead-test"
             from(components["java"])
-            versionMapping {
-                usage("java-api") {
-                    fromResolutionOf("runtimeClasspath")
-                }
-                usage("java-runtime") {
-                    fromResolutionResult()
-                }
-            }
             pom {
                 name = "Codehead-Test"
                 description = "Testing utilities"
