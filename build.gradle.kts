@@ -1,10 +1,9 @@
-
-
 plugins {
     `java-library`
     `maven-publish`
     signing
     checkstyle
+    id("io.github.gradle-nexus.publish-plugin") version "2.0.0"
 }
 
 repositories {
@@ -51,7 +50,7 @@ tasks.named<Test>("test") {
 }
 
 group = "com.codeheadsystems"
-version = "1.0.7-SNAPSHOT"
+version = "1.0.8-SNAPSHOT"
 
 publishing {
     publications {
@@ -113,5 +112,12 @@ signing {
 tasks.javadoc {
     if (JavaVersion.current().isJava9Compatible) {
         (options as StandardJavadocDocletOptions).addBooleanOption("html5", true)
+    }
+}
+
+// gradle publishToSonatype closeAndReleaseSonatypeStagingRepository
+nexusPublishing {
+    repositories {
+        sonatype()
     }
 }
