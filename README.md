@@ -18,7 +18,7 @@ Java8 Compatible.
 gradle
 ```groovy
 dependencies {
-    implementation 'com.codeheadsystems:codehead-test:1.0.6'
+    implementation 'com.codeheadsystems:codehead-test:1.0.8'
 }
 ```
 
