@@ -15,10 +15,14 @@ Java8 Compatible.
 
 ## Release
 
+| Library       | Purpose                           | Version                                                                                   |
+|---------------|-----------------------------------|-------------------------------------------------------------------------------------------|
+| codehead-test | Core Library                      | ![feature-flag](https://img.shields.io/maven-central/v/com.codeheadsystems/codehead-test) |
+
 gradle
 ```groovy
 dependencies {
-    implementation 'com.codeheadsystems:codehead-test:1.0.8'
+    testImplementation 'com.codeheadsystems:codehead-test:1.0.8'
 }
 ```
 
