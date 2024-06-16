@@ -19,7 +19,6 @@ package com.codeheadsystems.test.model;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.google.common.collect.ImmutableList;
 import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Optional;
@@ -65,7 +64,7 @@ public class StandardImmutableModelTest extends BaseJacksonTest<StandardImmutabl
 
     // Assert
     assertThat(names)
-        .containsExactlyInAnyOrderElementsOf(ImmutableList.of("someInt", "someString", "someWeirdString"));
+        .containsExactlyInAnyOrderElementsOf(List.of("someInt", "someString", "someWeirdString"));
   }
 
   /**
@@ -82,7 +81,7 @@ public class StandardImmutableModelTest extends BaseJacksonTest<StandardImmutabl
 
     // Assert
     assertThat(names)
-        .containsExactlyInAnyOrderElementsOf(ImmutableList.of("bunchOfString", "bunchOfOtherString"));
+        .containsExactlyInAnyOrderElementsOf(List.of("bunchOfString", "bunchOfOtherString"));
   }
 
   /**
