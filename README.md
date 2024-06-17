@@ -22,7 +22,7 @@ Java8 Compatible.
 gradle
 ```groovy
 dependencies {
-    testImplementation 'com.codeheadsystems:codehead-test:1.0.8'
+    testImplementation 'com.codeheadsystems:codehead-test:1.0.9'
 }
 ```
 

@@ -49,7 +49,7 @@ tasks.named<Test>("test") {
 }
 
 group = "com.codeheadsystems"
-version = "1.0.9-SNAPSHOT"
+version = "1.0.10-SNAPSHOT"
 
 publishing {
     publications {
