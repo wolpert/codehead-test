@@ -4,7 +4,7 @@
 [versions]
 assertj = "3.26.0"
 immutables = '2.10.1'
-jackson = '2.17.1'
+jackson = '2.17.2'
 jsr305 = '3.0.2'
 junit-jupiter = "5.10.3"
 mokito = '5.12.0'
