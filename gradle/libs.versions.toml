@@ -4,10 +4,10 @@
 [versions]
 assertj = "3.26.3"
 immutables = '2.10.1'
-jackson = '2.17.2'
+jackson = '2.18.0'
 jsr305 = '3.0.2'
-junit-jupiter = "5.11.0"
-mokito = '5.13.0'
+junit-jupiter = "5.11.1"
+mokito = '5.14.1'
 slf4j = '2.0.16'
 
 [libraries]
