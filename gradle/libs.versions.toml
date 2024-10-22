@@ -6,8 +6,8 @@ assertj = "3.26.3"
 immutables = '2.10.1'
 jackson = '2.18.0'
 jsr305 = '3.0.2'
-junit-jupiter = "5.11.2"
-mokito = '5.14.1'
+junit-jupiter = "5.11.3"
+mokito = '5.14.2'
 slf4j = '2.0.16'
 
 [libraries]
