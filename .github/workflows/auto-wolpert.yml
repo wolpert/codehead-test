@@ -1,4 +1,4 @@
-name: auto-merge
+name: Wolpert Check
 on: pull_request
 
 permissions:
