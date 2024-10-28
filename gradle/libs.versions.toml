@@ -2,7 +2,7 @@
 # https://docs.gradle.org/current/userguide/platforms.html#sub::toml-dependencies-format
 
 [versions]
-assertj = "3.26.0"
+assertj = "3.26.3"
 immutables = '2.10.1'
 jackson = '2.18.0'
 jsr305 = '3.0.2'
