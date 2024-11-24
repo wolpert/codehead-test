@@ -8,7 +8,7 @@ ObjectMapper to be used for the tests as well. See the state machine project for
 
 I've seen variations of this from different places and made my own version that uses junit5 and assertJ.
 
-Java8 Compatible.
+Java 11 Compatible.
 
 ## Status
 ![CodeHead-Test Build](https://github.com/wolpert/codehead-test/actions/workflows/gradle.yml/badge.svg)
@@ -17,12 +17,12 @@ Java8 Compatible.
 
 | Library       | Purpose                           | Version                                                                                   |
 |---------------|-----------------------------------|-------------------------------------------------------------------------------------------|
-| codehead-test | Core Library                      | ![feature-flag](https://img.shields.io/maven-central/v/com.codeheadsystems/codehead-test) |
+| codehead-test | Core Library                      | ![codehead-test](https://img.shields.io/maven-central/v/com.codeheadsystems/codehead-test) |
 
 gradle
 ```groovy
 dependencies {
-    testImplementation 'com.codeheadsystems:codehead-test:1.0.9'
+    testImplementation 'com.codeheadsystems:codehead-test:VERSION'
 }
 ```
 
