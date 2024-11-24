@@ -102,6 +102,10 @@ tasks.javadoc {
     }
 }
 
+// git checkout main 
+// git pull
+// make changes
+// git checkout -b verxion_1_0_12 && gradle clean build test && git add . && git commit -m "Updated version" && git push origin `git branch --show-current` && gh pr create --title "auto-approve check" --body "auto-approve"
 // gradle publishToSonatype closeAndReleaseSonatypeStagingRepository
 nexusPublishing {
     repositories {
