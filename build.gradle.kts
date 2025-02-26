@@ -49,7 +49,8 @@ tasks.named<Test>("test") {
 }
 
 group = "com.codeheadsystems"
-version = "1.0.12-SNAPSHOT"
+//version = "1.0.12-SNAPSHOT"
+version = "1.0.12"
 
 publishing {
     publications {
