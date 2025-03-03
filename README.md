@@ -1,5 +1,7 @@
 # Test utilities
 
+# NOTE: ARCHIVED AND THIS IS MOVED TO https://github.com/wolpert/libraries
+
 ## Immutable/Jackson JSON tests
 
 Tests the ability for your **Immutables** objects to be JSON friendly. Validates you have all the jackson
